@@ -1,0 +1,55 @@
+{% extends 'samples/base.html' %}
+
+{% block title %}Sample List - Intergalactic Samples{% endblock %}
+
+{% block content %}
+    <h2>Sample List</h2>
+    
+    <form method="get" class="search-form">
+        {{ form.as_p }}
+        <button type="submit" class="btn">Search</button>
+    </form>
+    
+    <ul class="sample-list">
+    {% for sample in samples %}
+        <li class="sample-item">
+            <h3>
+                <a href="{% url 'sample_detail' pk=sample.pk %}">
+                    {{ sample.sample_id }} - {{ sample.planet }}
+                </a>
+            </h3>
+            <p>Type: {{ sample.get_sample_type_display }}</p>
+            <p>Date Collected: {{ sample.date_collected }}</p>
+            <a href="{% url 'sample_update' pk=sample.pk %}" class="btn">Edit</a>
+            <a href="{% url 'sample_delete' pk=sample.pk %}" class="btn delete-btn">Delete</a>
+        </li>
+        {% empty %}
+        <li>No samples found matching your search criteria.</li>
+    {% endfor %}
+    </ul>
+
+    {% if samples.has_other_pages %}
+    <div class="page-info">
+        Showing samples {{ samples.start_index }} to {{ samples.end_index }} of {{ samples.paginator.count }} total
+    </div>
+    <div class="pagination">
+        {% if samples.has_previous %}
+            <a href="?page={{ samples.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="btn">&laquo; Previous</a>
+        {% endif %}
+
+        {% for i in samples.paginator.page_range %}
+            {% if samples.number == i %}
+                <span class="btn active">{{ i }}</span>
+            {% else %}
+                <a href="?page={{ i }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="btn">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if samples.has_next %}
+            <a href="?page={{ samples.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}" class="btn">Next &raquo;</a>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <a href="{% url 'sample_create' %}" class="btn">Add New Sample</a>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'samples/base.html' %}
+
+{% block title %}Server Error{% endblock %}
+
+{% block content %}
+    <h1>500 - Server Error</h1>
+    <p>Sorry, something went wrong on our end. Please try again later.</p>
+    <a href="{% url 'sample_list' %}" class="btn">Return to Home</a>
+{% endblock %}

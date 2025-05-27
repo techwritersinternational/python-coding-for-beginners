@@ -1,0 +1,13 @@
+{% extends 'samples/base.html' %}
+
+{% block content %}
+    <h2>Sample Detail: {{ sample.sample_id }}</h2>
+    <p>Planet: {{ sample.planet }}</p>
+    <p>Type: {{ sample.get_sample_type_display }}</p>
+    <p>Date Collected: {{ sample.date_collected }}</p>
+    <p>Mass: {{ sample.mass }} g</p>
+    <p>Description: {{ sample.description }}</p>
+    <p>Collector: {{ sample.collector.username }}</p>
+    <a href="{% url 'sample_update' pk=sample.pk %}">Edit</a>
+    <a href="{% url 'sample_delete' pk=sample.pk %}">Delete</a>
+{% endblock %}

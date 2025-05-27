@@ -1,0 +1,11 @@
+{% extends 'samples/base.html' %}
+
+{% block content %}
+    <h2>Confirm Delete</h2>
+    <p>Are you sure you want to delete the sample "{{ sample.sample_id }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+    </form>
+    <a href="{% url 'sample_detail' pk=sample.pk %}">Cancel</a>
+{% endblock %}

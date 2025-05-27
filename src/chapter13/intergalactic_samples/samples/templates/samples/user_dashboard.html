@@ -1,0 +1,36 @@
+{% extends 'samples/base.html' %}
+
+{% block title %}Dashboard - Intergalactic Samples{% endblock %}
+
+{% block content %}
+    <h2>Your Dashboard</h2>
+    
+    <div class="dashboard-summary">
+        <h3>Summary</h3>
+        <p>Total Samples: {{ total_samples }}</p>
+        <h4>Sample Types:</h4>
+        <ul>
+        {% for type in sample_types %}
+            <li>{{ type.sample_type }}: {{ type.count }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="dashboard-recent">
+        <h3>Recent Samples</h3>
+        <ul>
+        {% for sample in recent_samples %}
+            <li>
+                <a href="{% url 'sample_detail' pk=sample.pk %}">
+                    {{ sample.sample_id }} - {{ sample.planet }} ({{ sample.date_collected }})
+                </a>
+            </li>
+        {% empty %}
+            <li>No samples collected yet.</li>
+        {% endfor %}
+        </ul>
+    </div>
+    
+    <a href="{% url 'sample_list' %}" class="btn">View All Samples</a>
+    <a href="{% url 'sample_create' %}" class="btn">Add New Sample</a>
+{% endblock %}

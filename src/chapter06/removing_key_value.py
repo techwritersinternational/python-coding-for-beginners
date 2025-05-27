@@ -1,0 +1,6 @@
+# filename: removing_key_value.py
+lunar_buggy = {'color': 'black chrome', 'wheels': 4, 'radio': 'sub-ether'}
+print(lunar_buggy)  # Outputs: {'color': 'black chrome', 'wheels': 4, 'radio': 'sub-ether'}
+
+del lunar_buggy['radio']
+print(lunar_buggy)  # Outputs: {'color': 'black chrome', 'wheels': 4}
