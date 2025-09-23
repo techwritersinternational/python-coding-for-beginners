@@ -11,6 +11,6 @@ phrase = "Python is awesome"
 words = phrase.split()
 print(words)  # Outputs: ['Python', 'is', 'awesome']
 
-print("Including a special \\ in a string")  # Outputs: He said, "Hello!"
+print("Including a special \\ in a string")  
 
 print("Languages:\tPython\tJava\tC++")
